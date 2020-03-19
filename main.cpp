@@ -1,4 +1,6 @@
-﻿#include <iostream>
+// Задания выполнил Беспальчук Денис
+
+#include <iostream>
 #include <cmath>
 #include <cstdint>
 #include <stack>
@@ -15,12 +17,13 @@ using namespace std;
 значения этих двух чисел по умолчанию.
 */
 class Power{
-public:
+private:
 	int first;
 	int second;
-	void setvalue() {
-		first = 2;
-		second = 5;
+public:
+	void setvalue(int f, int s) {
+		first = f;
+		second = s;
 	}
 
 	void calculate() {
@@ -42,12 +45,20 @@ m_red, m_green, m_blue и m_alpha ( #include cstdint для доступа к э
 */
 class RGBA {
 
-public:
-	int m_red = 0, m_green = 0, m_blue = 0, m_alpha = 255;
+private:
 
-	RGBA() {
-		std::uint8_t m_red = 0, m_green = 0, m_blue = 0, m_alpha = 255;
-		cout << "\nПри std::uint8_t \nПеременная m_red = " << m_red << "\nПеременная m_green = " << m_green << "\nПеременная m_blue = " << m_blue << "\nПеременная m_alpha = " << m_alpha << endl;
+	std::uint8_t m_red, m_green, m_blue, m_alpha;
+
+public:
+
+	RGBA() : m_red(0), m_green(0), m_blue(0), m_alpha(255) {
+
+		cout << "\nПри std::uint8_t \nПеременная m_red = " << m_red << "\nПеременная m_green = " << m_green << "\nПеременная m_blue = " << m_blue << "\nПеременная m_alpha = " << m_alpha << endl << endl;
+	}
+
+	RGBA(int r, int g, int b, int a) : m_red(r), m_green(g), m_blue(b), m_alpha(a) {
+
+		//cout << "\nПри std::uint8_t \nПеременная m_red = " << m_red << "\nПеременная m_green = " << m_green << "\nПеременная m_blue = " << m_blue << "\nПеременная m_alpha = " << m_alpha << endl;
 	}
 
 	void print()
@@ -55,26 +66,44 @@ public:
 		cout << "\nЗначение m_red = " << m_red << "\nЗначение m_green = " << m_green << "\nЗначение m_blue = " << m_blue << "\nЗначение m_alpha = " << m_alpha << endl;
 	}
 
-	void setRGBA() {
-		cout << "Введите значение для m_red = ";
-		cin >> m_red;
-		cout << "";
-
-		cout << "Введите значение для m_green = ";
-		cin >> m_green;
-		cout << "";
-
-		cout << "Введите значение для m_blue = ";
-		cin >> m_blue;
-		cout << "";
-
-		cout << "Введите значение для m_alpha = ";
-		cin >> m_alpha;
-		cout << "";
+	void setm_red(int r) 
+	{
+		m_red = r;
 	}
 
-	int getRGBA() {
-		return m_red, m_green, m_blue, m_alpha;
+	void setm_green(int g) 
+	{
+		m_green = g;
+	}
+
+	void setm_blue(int b) 
+	{
+		m_blue = b;
+	}
+
+	void setm_alpha(int a) 
+	{
+		m_alpha = a;
+	}
+
+	int getm_red() 
+	{
+		return m_red;
+	}
+
+	int getm_green() 
+	{
+		return m_green;
+	}
+
+	int getm_blue() 
+	{
+		return m_blue;
+	}
+
+	int getm_alpha() 
+	{
+		return m_alpha;
 	}
 };
 
@@ -133,17 +162,36 @@ public:
 int main() {
 
 	setlocale(LC_ALL, "Russian");
+
 	cout << "Задание 1\n";
+
 	Power calculate;
-	calculate.setvalue();
+	calculate.setvalue(3, 5);
 	calculate.calculate();
 	cout << "\n";
 
 	cout << "Задание 2\n";
 	RGBA one;
-	one.setRGBA();
-	one.getRGBA();
-	one.print();
+	int r, g, b, a;
+	cout << "Введите значение для m_red = ";
+	cin >> r;
+	cout << "Введите значение для m_green = ";
+	cin >> g;
+	cout << "Введите значение для m_blue = ";
+	cin >> b;
+	cout << "Введите значение для m_alpha = ";
+	cin >> a;
+	cout << endl;
+	RGBA two(r, g, b, a);
+	two.setm_red(r);
+	two.setm_green(g);
+	two.setm_blue(b);
+	two.setm_alpha(a);
+	two.getm_red();
+	two.getm_green();
+	two.getm_blue();
+	two.getm_alpha();
+	two.print();
 	cout << "\n";
 
 	cout << "Задание 3\n";
