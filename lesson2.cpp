@@ -4,6 +4,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <conio.h>
+#include <cassert>a
 
 using namespace std;
 
@@ -88,15 +89,15 @@ public:
 	{
 		count++;
 	}
-	void setYear(int year)
+	void setYear(int year) 
 	{
 		m_year = year;
 	}
-	int getYear() {
+	int getYear() const {
 		return m_year;
 	}
 
-	void printStudent()
+	void printStudent() const
 	{
 		cout << "\nИмя студента: " << getName() << "\nПол: " << getGender() << "\nВозраст: " << getAge() << "\nВес: " << getWeight() << "\nГод обучения: " << getYear() << '\n' << endl;
 		cout << "Количество студентов: ";
@@ -117,28 +118,27 @@ int Student::count = 0;
 */
 
 class Random {
-private:
-	int low;
-	int high;
-	int number;
 public:
-	Random() {}
-
-	Random(int L, int H) : low(L), high(H) { setRandom(); }
-	
-	void setRandom()
+	unsigned seed = 0;
+	Random() {  }
+	void initGenerator(Random& generator)
 	{
-		srand(time(NULL));
-		number = (rand() % ((high - low + 1) - low));
+		generator.seed = (unsigned(time(nullptr)));
 	}
+	
+	unsigned random(Random& generator, double low, double high)
+	{
+		assert(low < high);
+		return ((((generator.seed / (high + 1 - low)) + low)* 10000) / 10000.0);
+	}
+};
 
-	int getNum() {
-		return number;
-	}
+class NRandom : private Random {
 
-	void printNum() {
-		cout << "Случайное число: " << number << endl;
-	}
+public:
+	NRandom(Random& generator, double low, double high) {}
+	
+
 };
 
 
@@ -182,11 +182,12 @@ int main() {
 
 	lavr.printStudent();
 
-
 	cout << "Задание 2\n";
 
-	Random one(0, 10);
-	one.printNum();
+	Random generator;
+	generator.initGenerator(generator);
+	cout << generator.random(generator, 0, 1) << endl;
+
 
 	cout << "Задание 3\n";
 
