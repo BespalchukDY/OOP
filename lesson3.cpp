@@ -32,9 +32,10 @@ public:
 
 class Parallelogram : public Figure
 {
-public:
+protected:
 	int a;
-	int b;
+	int b; 
+public:
 	Parallelogram(int A) : a(A) { }
 	Parallelogram(int A, int B) : a(A), b(B) { }
 	int area() override
@@ -269,10 +270,15 @@ private:
 		PEAKS, // пики
 		WORMS, // черви
 		BAPTIZE, // крести
-		BUBI // буби
+		BUBI, // буби
+	
 	}; 
 	enum value // значения карт
 	{
+		TWO = 2, // два
+		THREE = 3, // три
+		FOUR = 4, // четыре
+		FIVE = 5, // пять
 		SIX = 6, // шесть
 		SEVEN = 7, // семь
 		EIGHT = 8, // восемь
@@ -282,15 +288,15 @@ private:
 		QUEEN = 10, // дама
 		KING = 10, // король
 		ACE = 1 // туз
-	}; // значение
+	}; 
 	bool position = true; // положение Открыта (лицом к игроку) или Закрыта (рубашкой к игроку)
 public:
 	Card(){}
-	void Flip()
+	bool Flip()
 	{
-		if (position == 0)
+		if (position == false)
 		{
-			position = 1;
+			position = true;
 			cout << "Карта открыта " << endl;
 		}
 		else
@@ -298,10 +304,10 @@ public:
 			cout << "Карта закрыта " << endl;
 		}
 	}
-	value getValue(int enumValue)
+	int getValue(int enumValue) const
 	{
 	
-		return (value)enumValue;
+		return enumValue;
 	}
 };
 
